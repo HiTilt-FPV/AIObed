@@ -1,4 +1,4 @@
-Copyright (c) 2025  HiTilt_FPV
+Copyright (c) 2025 Dennis B. aka HiTilt_FPV
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
