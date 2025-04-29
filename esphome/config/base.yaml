@@ -1,0 +1,57 @@
+substitutions:
+  version: "0.1.0"
+
+esphome:
+  name: "${name}"
+  friendly_name: "${friendly_name}"
+
+  project:
+    name: "HiTilt-FPV.AIObed"
+    version: "${version}"
+
+logger:
+  baud_rate: 0 # disable logging via UART
+
+button:
+  - platform: restart
+    name: "Restart"
+    entity_category: diagnostic
+
+  - platform: safe_mode
+    name: "Restart (Safe Mode)"
+    entity_category: diagnostic
+
+binary_sensor:
+  - platform: status
+    name: "Status"
+    update_interval: 60s
+    device_class: connectivity
+    entity_category: diagnostic
+
+sensor:
+  - platform: wifi_signal
+    name: "Wifi Signal dB"
+    id: wifi_signal_db
+    update_interval: 60s
+    entity_category: diagnostic
+
+  - platform: internal_temperature
+    name: "CPU Temperature"
+    entity_category: diagnostic
+
+text_sensor: # uncomment this section if the device gets too overloaded
+  - platform: version
+    name: "ESPHome Version"
+    entity_category: diagnostic
+
+  - platform: uptime
+    name: Uptime
+    update_interval: 60s
+    entity_category: diagnostic
+
+  - platform: wifi_info
+    entity_category: diagnostic
+    ip_address:
+      name: "IP Address"
+    mac_address:
+      name: "MAC Address"

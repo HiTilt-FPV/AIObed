@@ -1,0 +1,49 @@
+substitutions:
+  occupancy_sensorname: "occupancy"  #lowercase only!
+  occupancy_friendly_sensorname: "Occupancy"
+
+binary_sensor:
+  - platform: template
+    name: "${occupancy_friendly_sensorname} ${occupancy_zone_friendlyname_0}"
+    id: "${occupancy_sensorname}_${occupancy_zone_name_0}"
+    device_class: occupancy
+    lambda: |-
+      if (id(${mmwave_sensorname}_${occupancy_zone_name_0}_radar_target).state or id(pir_${occupancy_zone_name_0}).state) {
+        return true;
+      }
+      else if (id(${mmwave_sensorname}_${occupancy_zone_name_0}_radar_target).state == 0 and id(pir_${occupancy_zone_name_0}).state == 0) {
+        return false;
+      }
+      else {
+        return id(${occupancy_sensorname}_${occupancy_zone_name_0}_radar_target).state;
+      }
+
+  - platform: template
+    name: "${occupancy_friendly_sensorname} ${occupancy_zone_friendlyname_1}"
+    id: "${occupancy_sensorname}_${occupancy_zone_name_1}"
+    device_class: occupancy
+    lambda: |-
+      if (id(${mmwave_sensorname}_${occupancy_zone_name_1}_radar_target).state or id(pir_${occupancy_zone_name_1}).state) {
+        return true;
+      }
+      else if (id(${mmwave_sensorname}_${occupancy_zone_name_1}_radar_target).state == 0 and id(pir_${occupancy_zone_name_1}).state == 0) {
+        return false;
+      }
+      else {
+        return id(${occupancy_sensorname}_${occupancy_zone_name_1}_radar_target).state;
+      }
+
+  - platform: template
+    name: "${occupancy_friendly_sensorname} ${occupancy_zone_friendlyname_2}"
+    id: "${occupancy_sensorname}_${occupancy_zone_name_2}"
+    device_class: occupancy
+    lambda: |-
+      if (id(${mmwave_sensorname}_${occupancy_zone_name_2}_radar_target).state or id(pir_${occupancy_zone_name_2}).state) {
+        return true;
+      }
+      else if (id(${mmwave_sensorname}_${occupancy_zone_name_2}_radar_target).state == 0 and id(pir_${occupancy_zone_name_2}).state == 0) {
+        return false;
+      }
+      else {
+        return id(${occupancy_sensorname}_${occupancy_zone_name_2}_radar_target).state;
+      }

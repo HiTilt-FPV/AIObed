@@ -1,0 +1,35 @@
+
+
+number:
+  - platform: template
+    name: "Voltage Threshold"
+    id: "bed_threshold"
+    optimistic: true
+    min_value: .2
+    max_value: 3.3
+    step: .02
+    restore_value: True
+    entity_category: "config"
+    on_value:
+    - lambda: |- 
+        id(bed_bin).set_upper_threshold(x);
+        id(bed_bin).set_lower_threshold(x);
+
+binary_sensor:
+  - platform: analog_threshold
+    id: "bed_bin"
+    device_class: "occupancy"
+    name: "Bed Occupancy"
+    sensor_id: pressure
+    threshold: 0.2
+    filters:
+      - invert:
+
+sensor:
+  - platform: adc
+    id: "pressure"
+    pin: "${resistance_0_pin}"
+    name: "Bed Pressure"
+    update_interval: 10s
+    entity_category: "diagnostic"
+    attenuation: auto

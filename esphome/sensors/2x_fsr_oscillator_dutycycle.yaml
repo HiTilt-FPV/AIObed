@@ -1,0 +1,147 @@
+  # https://esphome.io/components/sensor/duty_cycle
+sensor:
+  - platform: duty_cycle
+    pin: "${fsr_0_pin}"
+    name: "${bed_occupancy_zone_friendlyname_0}"
+    id: "${bed_occupancy_zone_name_0}"
+    update_interval: 1s
+
+  - platform: duty_cycle
+    pin: "${fsr_1_pin}"
+    name: "${bed_occupancy_zone_friendlyname_1}"
+    id: "${bed_occupancy_zone_name_1}"
+    update_interval: 1s
+
+binary_sensor:
+  - platform: template
+    name: "${bed_occupancy_zone_friendlyname_0} Occupied"
+    id: "${bed_occupancy_zone_name_0}_occupied"
+    lambda: |-
+      if (id(${bed_occupancy_zone_name_0}_off_threshold_active).state == true){
+        if (id(${bed_occupancy_zone_name_0}).state < id(${bed_occupancy_zone_name_0}_on_threshold).state) {
+          // Bed set to occupied
+          return true;
+        } else if ((id(${bed_occupancy_zone_name_0}).state >= id(${bed_occupancy_zone_name_0}_on_threshold).state) & (id(${bed_occupancy_zone_name_0}).state < id(${bed_occupancy_zone_name_0}_off_threshold).state)){
+          // Keep bed occupancy state as is if the duty cycle value is between "bed on" and "bed off" number values
+          if (id(${bed_occupancy_zone_name_0}_occupied).state == true){
+            return true;
+          }
+          else {
+            return false;
+          }
+        } else if (id(${bed_occupancy_zone_name_0}).state >= id(${bed_occupancy_zone_name_0}_off_threshold).state){
+          // Bed set to unoccupied
+          return false;
+        } else {
+          // just in case if an unexpected state happens
+          return false;
+        }
+      } else {
+        if (id(${bed_occupancy_zone_name_0}).state < id(${bed_occupancy_zone_name_0}_on_threshold).state) {
+          // Bed set to occupied
+          return true;
+        } else if (id(${bed_occupancy_zone_name_0}).state >= id(${bed_occupancy_zone_name_0}_on_threshold).state){
+          // Bed set to unoccupied
+          return false;
+        } else {
+          // just in case if an unexpected state happens
+          return false;
+        }
+      }
+
+  - platform: template
+    name: "${bed_occupancy_zone_friendlyname_1} Occupied"
+    id: "${bed_occupancy_zone_name_1}_occupied"
+    lambda: |-
+      if (id(${bed_occupancy_zone_name_1}_off_threshold_active).state == true){
+        if (id(${bed_occupancy_zone_name_1}).state < id(${bed_occupancy_zone_name_1}_on_threshold).state) {
+          // Bed set to occupied
+          return true;
+        } else if ((id(${bed_occupancy_zone_name_1}).state >= id(${bed_occupancy_zone_name_1}_on_threshold).state) & (id(${bed_occupancy_zone_name_1}).state < id(${bed_occupancy_zone_name_1}_off_threshold).state)){
+          // Keep bed occupancy state as is if the duty cycle value is between "bed on" and "bed off" number values
+          if (id(${bed_occupancy_zone_name_1}_occupied).state == true){
+            return true;
+          }
+          else {
+            return false;
+          }
+        } else if (id(${bed_occupancy_zone_name_1}).state >= id(${bed_occupancy_zone_name_1}_off_threshold).state){
+          // Bed set to unoccupied
+          return false;
+        } else {
+          // just in case if an unexpected state happens
+          return false;
+        }
+      } else {
+        if (id(${bed_occupancy_zone_name_1}).state < id(${bed_occupancy_zone_name_1}_on_threshold).state) {
+          // Bed set to occupied
+          return true;
+        } else if (id(${bed_occupancy_zone_name_1}).state >= id(${bed_occupancy_zone_name_1}_on_threshold).state){
+          // Bed set to unoccupied
+          return false;
+        } else {
+          // just in case if an unexpected state happens
+          return false;
+        }
+      }
+
+  - platform: template
+    name: "${bed_occupancy_zone_friendlyname_0} Off-Level"
+    id: "${bed_occupancy_zone_name_0}_off_threshold_active"
+    lambda: |-
+      if (id(${bed_occupancy_zone_name_0}_on_threshold).state < id(${bed_occupancy_zone_name_0}_off_threshold).state){
+        return true;
+      } else {
+        return false;
+      }
+
+  - platform: template
+    name: "${bed_occupancy_zone_friendlyname_1} Off-Level"
+    id: "${bed_occupancy_zone_name_1}_off_threshold_active"
+    lambda: |-
+      if (id(${bed_occupancy_zone_name_1}_on_threshold).state < id(${bed_occupancy_zone_name_1}_off_threshold).state){
+        return true;
+      } else {
+        return false;
+      }
+
+number:
+  - platform: template
+    name: "${bed_occupancy_zone_friendlyname_0} ON-Level"
+    id: "${bed_occupancy_zone_name_0}_on_threshold"
+    optimistic: true
+    min_value: 0
+    max_value: 100
+    initial_value: 50
+    restore_value: true
+    step: 1
+
+  - platform: template
+    name: "${bed_occupancy_zone_friendlyname_0} OFF-Level"
+    id: "${bed_occupancy_zone_name_0}_off_threshold"
+    optimistic: true
+    min_value: 0
+    max_value: 100
+    initial_value: 75
+    restore_value: true
+    step: 1
+
+  - platform: template
+    name: "${bed_occupancy_zone_friendlyname_1} ON-Level"
+    id: "${bed_occupancy_zone_name_1}_on_threshold"
+    optimistic: true
+    min_value: 0
+    max_value: 100
+    initial_value: 50
+    restore_value: true
+    step: 1
+
+  - platform: template
+    name: "${bed_occupancy_zone_friendlyname_1} OFF-Level"
+    id: "${bed_occupancy_zone_name_1}_off_threshold"
+    optimistic: true
+    min_value: 0
+    max_value: 100
+    initial_value: 75
+    restore_value: true
+    step: 1

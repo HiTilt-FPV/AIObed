@@ -1,0 +1,36 @@
+substitutions:
+  pir_delayed_off: 1s
+  pir_delayed_on: 0s
+  pir_pin_mode: "INPUT_PULLDOWN"
+
+binary_sensor:
+  - platform: gpio
+    name: "PIR ${occupancy_zone_friendlyname_0}"
+    id: "pir_${occupancy_zone_name_0}"
+    pin:
+      number: "${pir_0_pin}"
+      mode: "${pir_pin_mode}"
+    device_class: motion
+    filters:
+      - delayed_on: "${pir_delayed_on}"
+      - delayed_off: "${pir_delayed_off}"
+  - platform: gpio
+    name: "PIR ${occupancy_zone_friendlyname_1}"
+    id: "pir_${occupancy_zone_name_1}"
+    pin:
+      number: "${pir_1_pin}"
+      mode: "${pir_pin_mode}"
+    device_class: motion
+    filters:
+      - delayed_on: "${pir_delayed_on}"
+      - delayed_off: "${pir_delayed_off}"
+  - platform: gpio
+    name: "PIR ${occupancy_zone_friendlyname_2}"
+    id: "pir_${occupancy_zone_name_2}"
+    pin:
+      number: "${pir_2_pin}"
+      mode: "${pir_pin_mode}"
+    device_class: motion
+    filters:
+      - delayed_on: "${pir_delayed_on}"
+      - delayed_off: "${pir_delayed_off}"

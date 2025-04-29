@@ -1,0 +1,64 @@
+number:
+  - platform: template
+    name: "Left Voltage Threshold"
+    id: "left_threshold"
+    optimistic: true
+    min_value: .2
+    max_value: 3.3
+    step: .02
+    restore_value: True
+    entity_category: "config"
+    on_value:
+    - lambda: |- 
+        id(bin_left).set_upper_threshold(x);
+        id(bin_left).set_lower_threshold(x);
+
+  - platform: template
+    name: "Right Voltage Threshold"
+    id: "right_threshold"
+    optimistic: true
+    min_value: .2
+    max_value: 3.3
+    step: .02
+    restore_value: True
+    entity_category: "config"
+    on_value:
+    - lambda: |- 
+        id(bin_right).set_upper_threshold(x);
+        id(bin_right).set_lower_threshold(x);
+
+binary_sensor:
+  - platform: analog_threshold
+    id: "bin_left"
+    device_class: "occupancy"
+    name: "Bed Left Occupancy"
+    sensor_id: pressure_left
+    threshold: 0.2
+    filters:
+      - invert:
+
+  - platform: analog_threshold
+    id: "bin_right"
+    device_class: "occupancy"
+    name: "Bed Right Occupancy"
+    sensor_id: pressure_right
+    threshold: 0.2
+    filters:
+      - invert:
+
+sensor:
+  - platform: adc
+    id: "pressure_left"
+    pin: "${resistance_0_pin}"
+    name: "Bed Pressure Left"
+    update_interval: 10s
+    entity_category: "diagnostic"
+    attenuation: auto
+
+  - platform: adc
+    id: "pressure_right"
+    pin: "${resistance_1_pin}"
+    name: "Bed Pressure Right"
+    update_interval: 10s
+    entity_category: "diagnostic"
+    attenuation: auto

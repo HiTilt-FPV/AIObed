@@ -1,0 +1,39 @@
+# Wemos ESP32 C3 mini
+# board data: https://www.wemos.cc/en/latest/c3/c3_mini.html
+
+# No free GPIO Pins left!
+
+substitutions:
+  # pins for FSR resistance strips
+  fsr_0_pin: GPIO03
+  fsr_1_pin: GPIO02
+  fsr_2_pin: GPIO01
+  fsr_3_pin: GPIO00
+  fsr_4_pin: GPIO04
+  fsr_5_pin: GPIO05
+  # GPIO pins for PIR sensor HIGH/LOW Input
+  pir_0_pin: GPIO06
+  # uart pins for mmWave sensors:
+  uart_0_rx_pin: GPIO20
+  uart_0_tx_pin: GGPIO21
+
+  rgb_led_pin: GPIO7
+  rgb_led_type: GRB
+
+esphome:
+  platformio_options:
+    board_build.extra_flags:
+      - "-DARDUINO_USB_CDC_ON_BOOT=0"
+    board_build.flash_mode: dio
+
+esp32:
+  board: lolin_c3_mini
+  variant: ESP32C3
+
+wifi:
+  output_power: 8.5dBm
+
+i2c:
+  sda: GPIO8
+  scl: GPIO10
+  id: bus_a

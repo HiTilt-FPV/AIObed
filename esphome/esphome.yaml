@@ -1,0 +1,109 @@
+substitutions:
+  name: "aiobed"  # lowercase only, have to be unique
+  friendly_name: "AIObed" # device name and entity prefix
+
+# light sensor settings:
+  # bh1750_update_interval: 5s
+
+# temperature, humidity and airquality sensor settings:
+  # bme_address: "0x76"  # for some modules you have to change it to 0x77
+  # bme_update_interval: 30s
+
+  # co2_offset: "0"  # bsec only
+  # humidity_offset: "0"
+  # iaq_offset: "0" # bsec only
+  # illuminance_offset: "0"
+  # pressure_offset: "0"
+  temperature_offset: "-6"
+  # voc_offset: "0" # bsec only
+
+  # entity display names for bed occupation zones in lowercase (you can uncomment unused zones):
+  bed_occupancy_zone_name_0: "bed_left_top"
+  bed_occupancy_zone_name_1: "bed_left_mid"
+  bed_occupancy_zone_name_2: "bed_left_bot"
+  bed_occupancy_zone_name_3: "bed_right_top"
+  bed_occupancy_zone_name_4: "bed_right_mid"
+  bed_occupancy_zone_name_5: "bed_right_bot"
+  # entity display names for bed occupation zones as friendly names (you can uncomment unused zones):
+  bed_occupancy_zone_friendlyname_0: "Left Top"
+  bed_occupancy_zone_friendlyname_1: "Left Mid"
+  bed_occupancy_zone_friendlyname_2: "Left Bot"
+  bed_occupancy_zone_friendlyname_3: "Right Top"
+  bed_occupancy_zone_friendlyname_3: "Right Mid"
+  bed_occupancy_zone_friendlyname_3: "Right Botom"
+
+  # entity display names for occupation zones in lowercase (you can uncomment unused zones):
+  occupancy_zone_name_0: "feet_left"
+  occupancy_zone_name_1: "feet_right"
+  occupancy_zone_name_2: "feet_bottom"
+  # entity display names for occupation zones as friendly names (you can uncomment unused zones):
+  occupancy_zone_friendlyname_0: "Feet Left"
+  occupancy_zone_friendlyname_1: "Feet Right"
+  occupancy_zone_friendlyname_2: "Feet Bottom"
+
+  # LD2410(c) does not work? Please notice:
+  # https://aiosense.readthedocs.io/en/latest/debugging/#ld2410c-does-not-work
+
+  # pir_delayed_off: 1s
+  # pir_delayed_on: 0s
+
+packages: # get remote packages from the aio-sense project
+  remote_package:
+    url: https://github.com/HiTilt-FPV/AIObed/
+    ref: esphome-v3.0.1
+    refresh: 1d
+    files:
+      - esphome/packages/base/base.yaml
+
+      # ----- board -----
+      # - esphome/packages/base/esp32-wr00m-32.yaml # NodeMCU recommended because it has 3 uarts for up to 3 floor zones
+      - esphome/packages/base/esp32-c3-mini.yaml #only one uart!
+
+      # ----- sensors -----
+      # - esphome/packages/sensors/bh1750.yaml # ambient light detection
+      # - esphome/packages/sensors/bme68x_bsec.yaml # air quality and temperature
+
+      # only use one of the following packages at once!
+      # FSR oscillator
+      # - esphome/packages/sensors/1x_fsr_oscillator_dutycycle.yaml # FSR for 1x bed occupancy detection zone
+      - esphome/packages/sensors/2x_fsr_oscillator_dutycycle.yaml # FSR for 2x bed occupancy detection zones
+      # - esphome/packages/sensors/3x_fsr_oscillator_dutycycle.yaml # FSR for 3x bed occupancy detection zones
+      # - esphome/packages/sensors/4x_fsr_oscillator_dutycycle.yaml # FSR for 4x bed occupancy detection zones
+      # - esphome/packages/sensors/5x_fsr_oscillator_dutycycle.yaml # FSR for 5x bed occupancy detection zones
+      # - esphome/packages/sensors/6x_fsr_oscillator_dutycycle.yaml # FSR for 6x bed occupancy detection zones
+
+      # only needed if PIR AND mmWave are enabled
+      # - esphome/packages/sensors/1x_floor_occupancy # logic module that returns occupancy of 1x floor zone
+      # - esphome/packages/sensors/2x_floor_occupancy # logic module that returns occupancy of 2x floor zones
+      # - esphome/packages/sensors/3x_floor_occupancy # logic module that returns occupancy of 3x floor zones
+
+      # enable PIR sensors
+      # - esphome/packages/sensors/1x_pir.yaml # movement detection 1x PIR 
+      # - esphome/packages/sensors/2x_pir.yaml # movement detection 2x PIR 
+      # - esphome/packages/sensors/3x_pir.yaml # movement detection 3x PIR
+
+      # enable mmWave sensors
+      # - esphome/packages/sensors/1x_ld2410.yaml # presence detection 1x mmWave
+      - esphome/packages/sensors/2x_ld2410.yaml # presence detection 2x mmWave
+      # - esphome/packages/sensors/3x_ld2410.yaml # presence detection 3x mmWave
+
+      # ----- logic modules -----
+
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret esphome_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret esphome_ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "AIObed_captive_portal"
+    password: !secret captive_portal_password
