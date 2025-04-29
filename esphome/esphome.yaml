@@ -29,8 +29,8 @@ substitutions:
   bed_occupancy_zone_friendlyname_1: "Left Mid"
   bed_occupancy_zone_friendlyname_2: "Left Bot"
   bed_occupancy_zone_friendlyname_3: "Right Top"
-  bed_occupancy_zone_friendlyname_3: "Right Mid"
-  bed_occupancy_zone_friendlyname_3: "Right Botom"
+  bed_occupancy_zone_friendlyname_4: "Right Mid"
+  bed_occupancy_zone_friendlyname_5: "Right Botom"
 
   # entity display names for occupation zones in lowercase (you can uncomment unused zones):
   occupancy_zone_name_0: "feet_left"
@@ -53,39 +53,39 @@ packages: # get remote packages from the aio-sense project
     ref: esphome-v3.0.1
     refresh: 1d
     files:
-      - esphome/packages/base/base.yaml
+      - esphome/config/base.yaml
 
       # ----- board -----
-      # - esphome/packages/base/esp32-wr00m-32.yaml # NodeMCU recommended because it has 3 uarts for up to 3 floor zones
-      - esphome/packages/base/esp32-c3-mini.yaml #only one uart!
+      - esphome/config/esp32-wr00m-32.yaml # NodeMCU recommended because it has 3 uarts for up to 3 floor zones
+      # - esphome/config/esp32-c3-mini.yaml #only one uart!
 
       # ----- sensors -----
-      # - esphome/packages/sensors/bh1750.yaml # ambient light detection
-      # - esphome/packages/sensors/bme68x_bsec.yaml # air quality and temperature
+      # - esphome/sensors/bh1750.yaml # ambient light detection
+      # - esphome/sensors/bme68x_bsec.yaml # air quality and temperature
 
       # only use one of the following packages at once!
       # FSR oscillator
-      # - esphome/packages/sensors/1x_fsr_oscillator_dutycycle.yaml # FSR for 1x bed occupancy detection zone
-      - esphome/packages/sensors/2x_fsr_oscillator_dutycycle.yaml # FSR for 2x bed occupancy detection zones
-      # - esphome/packages/sensors/3x_fsr_oscillator_dutycycle.yaml # FSR for 3x bed occupancy detection zones
-      # - esphome/packages/sensors/4x_fsr_oscillator_dutycycle.yaml # FSR for 4x bed occupancy detection zones
-      # - esphome/packages/sensors/5x_fsr_oscillator_dutycycle.yaml # FSR for 5x bed occupancy detection zones
-      # - esphome/packages/sensors/6x_fsr_oscillator_dutycycle.yaml # FSR for 6x bed occupancy detection zones
+      # - esphome/sensors/1x_fsr_oscillator_dutycycle.yaml # FSR for 1x bed occupancy detection zone
+      - esphome/sensors/2x_fsr_oscillator_dutycycle.yaml # FSR for 2x bed occupancy detection zones
+      # - esphome/sensors/3x_fsr_oscillator_dutycycle.yaml # FSR for 3x bed occupancy detection zones
+      # - esphome/sensors/4x_fsr_oscillator_dutycycle.yaml # FSR for 4x bed occupancy detection zones
+      # - esphome/sensors/5x_fsr_oscillator_dutycycle.yaml # FSR for 5x bed occupancy detection zones
+      # - esphome/sensors/6x_fsr_oscillator_dutycycle.yaml # FSR for 6x bed occupancy detection zones
 
       # only needed if PIR AND mmWave are enabled
-      # - esphome/packages/sensors/1x_floor_occupancy # logic module that returns occupancy of 1x floor zone
-      # - esphome/packages/sensors/2x_floor_occupancy # logic module that returns occupancy of 2x floor zones
-      # - esphome/packages/sensors/3x_floor_occupancy # logic module that returns occupancy of 3x floor zones
+      # - esphome/sensors/1x_floor_occupancy # logic module that returns occupancy of 1x floor zone
+      # - esphome/sensors/2x_floor_occupancy # logic module that returns occupancy of 2x floor zones
+      # - esphome/sensors/3x_floor_occupancy # logic module that returns occupancy of 3x floor zones
 
       # enable PIR sensors
-      # - esphome/packages/sensors/1x_pir.yaml # movement detection 1x PIR 
-      # - esphome/packages/sensors/2x_pir.yaml # movement detection 2x PIR 
-      # - esphome/packages/sensors/3x_pir.yaml # movement detection 3x PIR
+      # - esphome/sensors/1x_pir.yaml # movement detection 1x PIR 
+      # - esphome/sensors/2x_pir.yaml # movement detection 2x PIR 
+      # - esphome/sensors/3x_pir.yaml # movement detection 3x PIR
 
       # enable mmWave sensors
-      # - esphome/packages/sensors/1x_ld2410.yaml # presence detection 1x mmWave
-      - esphome/packages/sensors/2x_ld2410.yaml # presence detection 2x mmWave
-      # - esphome/packages/sensors/3x_ld2410.yaml # presence detection 3x mmWave
+      # - esphome/sensors/1x_ld2410.yaml # presence detection 1x mmWave
+      - esphome/sensors/2x_ld2410.yaml # presence detection 2x mmWave
+      # - esphome/sensors/3x_ld2410.yaml # presence detection 3x mmWave
 
       # ----- logic modules -----
 
