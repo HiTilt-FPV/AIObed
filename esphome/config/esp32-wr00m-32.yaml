@@ -24,12 +24,12 @@ substitutions:
   pir_1_pin: GPIO14
   pir_2_pin: GPIO12
   # uart pins for mmWave sensors:
-  uart_0_rx_pin: GPIO01
-  uart_0_tx_pin: GPIO03
-  uart_1_rx_pin: GPIO04
-  uart_1_tx_pin: GPIO05
-  uart_2_rx_pin: GPIO16
+  uart_0_tx_pin: GPIO01
+  uart_0_rx_pin: GPIO03
+  uart_1_tx_pin: GPIO04
+  uart_1_rx_pin: GPIO05
   uart_2_tx_pin: GPIO17
+  uart_2_rx_pin: GPIO16
 
 esp32:
   board: nodemcu-32s
