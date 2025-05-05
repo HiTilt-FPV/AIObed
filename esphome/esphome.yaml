@@ -57,7 +57,7 @@ packages: # get remote packages from the aio-sense project
 
       # ----- board -----
       - esphome/config/esp32-wr00m-32.yaml # NodeMCU recommended because it has 3 uarts for up to 3 floor zones
-      # - esphome/config/esp32-c3-mini.yaml #only one uart!
+      # - esphome/config/esp32-c3-mini.yaml # Can only have one PIR, mmWave and occupancy zone!
 
       # ----- sensors -----
       # - esphome/sensors/bh1750.yaml # ambient light detection
@@ -73,9 +73,9 @@ packages: # get remote packages from the aio-sense project
       # - esphome/sensors/6x_fsr_oscillator_dutycycle.yaml # FSR for 6x bed occupancy detection zones
 
       # only needed if PIR AND mmWave are enabled
-      # - esphome/sensors/1x_floor_occupancy # logic module that returns occupancy of 1x floor zone
-      # - esphome/sensors/2x_floor_occupancy # logic module that returns occupancy of 2x floor zones
-      # - esphome/sensors/3x_floor_occupancy # logic module that returns occupancy of 3x floor zones
+      # - esphome/sensors/1x_floor_occupancy.yaml # logic module that returns occupancy of 1x floor zone
+      # - esphome/sensors/2x_floor_occupancy.yaml # logic module that returns occupancy of 2x floor zones
+      # - esphome/sensors/3x_floor_occupancy.yaml # logic module that returns occupancy of 3x floor zones
 
       # enable PIR sensors
       # - esphome/sensors/1x_pir.yaml # movement detection 1x PIR 
