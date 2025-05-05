@@ -13,7 +13,7 @@ sensor:
     update_interval: 1s
 
   - platform: duty_cycle
-    pin: "${fsr_1_pin}"
+    pin: "${fsr_2_pin}"
     name: "${bed_occupancy_zone_friendlyname_2}"
     id: "${bed_occupancy_zone_name_2}"
     update_interval: 1s

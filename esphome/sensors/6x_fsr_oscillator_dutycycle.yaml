@@ -13,25 +13,25 @@ sensor:
     update_interval: 1s
 
   - platform: duty_cycle
-    pin: "${fsr_1_pin}"
+    pin: "${fsr_2_pin}"
     name: "${bed_occupancy_zone_friendlyname_2}"
     id: "${bed_occupancy_zone_name_2}"
     update_interval: 1s
 
   - platform: duty_cycle
-    pin: "${fsr_1_pin}"
+    pin: "${fsr_3_pin}"
     name: "${bed_occupancy_zone_friendlyname_3}"
     id: "${bed_occupancy_zone_name_3}"
     update_interval: 1s
 
   - platform: duty_cycle
-    pin: "${fsr_1_pin}"
+    pin: "${fsr_4_pin}"
     name: "${bed_occupancy_zone_friendlyname_4}"
     id: "${bed_occupancy_zone_name_4}"
     update_interval: 1s
 
   - platform: duty_cycle
-    pin: "${fsr_1_pin}"
+    pin: "${fsr_5_pin}"
     name: "${bed_occupancy_zone_friendlyname_5}"
     id: "${bed_occupancy_zone_name_5}"
     update_interval: 1s
@@ -297,7 +297,7 @@ binary_sensor:
     name: "${bed_occupancy_zone_friendlyname_4} Off-Level"
     id: "${bed_occupancy_zone_name_4}_off_threshold_active"
     lambda: |-
-      if (id(${bed_occupancy_zone_name_4}_on_threshold).state < id(${bed_occupancy_zone_name_3}_off_threshold).state){
+      if (id(${bed_occupancy_zone_name_4}_on_threshold).state < id(${bed_occupancy_zone_name_4}_off_threshold).state){
         return true;
       } else {
         return false;
@@ -307,7 +307,7 @@ binary_sensor:
     name: "${bed_occupancy_zone_friendlyname_5} Off-Level"
     id: "${bed_occupancy_zone_name_5}_off_threshold_active"
     lambda: |-
-      if (id(${bed_occupancy_zone_name_5}_on_threshold).state < id(${bed_occupancy_zone_name_3}_off_threshold).state){
+      if (id(${bed_occupancy_zone_name_5}_on_threshold).state < id(${bed_occupancy_zone_name_5}_off_threshold).state){
         return true;
       } else {
         return false;

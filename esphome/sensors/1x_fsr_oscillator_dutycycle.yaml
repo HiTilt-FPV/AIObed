@@ -55,16 +55,6 @@ binary_sensor:
         }
       }
 
-  - platform: template
-    name: "${bed_occupancy_zone_friendlyname_0} Off-Level"
-    id: "${bed_occupancy_zone_name_0}_off_threshold_active"
-    lambda: |-
-      if (id(${bed_occupancy_zone_name_0}_on_threshold).state < id(${bed_occupancy_zone_name_0}_off_threshold).state){
-        return true;
-      } else {
-        return false;
-      }
-
 number:
   - platform: template
     name: "${bed_occupancy_zone_friendlyname_0} ON-Level"
