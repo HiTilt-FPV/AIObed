@@ -24,7 +24,6 @@ button:
 binary_sensor:
   - platform: status
     name: "Status"
-    update_interval: 60s
     device_class: connectivity
     entity_category: diagnostic
 
