@@ -158,7 +158,6 @@ binary_sensor:
       }
 
 number:
-number:
   - platform: template
     name: "${bed_occupancy_zone_friendlyname_0} ON-Level"
     id: "${bed_occupancy_zone_name_0}_on_threshold"

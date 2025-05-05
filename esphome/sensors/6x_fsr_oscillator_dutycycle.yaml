@@ -414,7 +414,7 @@ number:
     restore_value: true
     step: 1
 
-    - platform: template
+  - platform: template
     name: "${bed_occupancy_zone_friendlyname_5} ON-Level"
     id: "${bed_occupancy_zone_name_5}_on_threshold"
     optimistic: true
