@@ -49,7 +49,6 @@ text_sensor: # uncomment this section if the device gets too overloaded
     entity_category: diagnostic
 
   - platform: wifi_info
-    entity_category: diagnostic
     ip_address:
       name: "IP Address"
     mac_address:
