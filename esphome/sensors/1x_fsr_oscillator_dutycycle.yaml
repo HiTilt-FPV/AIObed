@@ -1,6 +1,5 @@
-#HW with NE555: https://www.youtube.com/watch?v=4NXjBRarmeg
-
-  # https://esphome.io/components/sensor/duty_cycle
+# https://esphome.io/components/sensor/duty_cycle
+# ToDo: "${bed_occupancy_zone_name_0}_occupied" could (should?) return itself (keep previous state) in the lambda if an unexpected state happens
 sensor:
   - platform: duty_cycle
     pin: "${fsr_0_pin}"

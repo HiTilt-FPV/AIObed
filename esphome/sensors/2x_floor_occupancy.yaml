@@ -15,7 +15,7 @@ binary_sensor:
         return false;
       }
       else {
-        return id(${occupancy_sensorname}_${occupancy_zone_name_0}_radar_target).state;
+        return id(${occupancy_sensorname}_${occupancy_zone_name_0}).state;
       }
 
   - platform: template
@@ -30,5 +30,5 @@ binary_sensor:
         return false;
       }
       else {
-        return id(${occupancy_sensorname}_${occupancy_zone_name_1}_radar_target).state;
+        return id(${occupancy_sensorname}_${occupancy_zone_name_1}).state;
       }

@@ -511,7 +511,7 @@ text_sensor:
     mac_address:
       name: "${occupancy_zone_friendlyname_0} ble mac address"
   - platform: ld2410
-    ld2410_id: l"${mmwave_sensorname}_${occupancy_zone_name_1}"
+    ld2410_id: "${mmwave_sensorname}_${occupancy_zone_name_1}"
     version:
       name: "${occupancy_zone_friendlyname_1} firmware version"
     mac_address:
@@ -522,4 +522,3 @@ text_sensor:
       name: "${occupancy_zone_friendlyname_2} firmware version"
     mac_address:
       name: "${occupancy_zone_friendlyname_2} ble mac address"
-
